@@ -1,0 +1,79 @@
+<MainMenu>:
+    label_wid: version
+    BoxLayout:
+
+
+        orientation: 'vertical'
+        padding: 50
+        spacing: 40
+
+        canvas.before:
+            Color:
+                rgba: (100/255,100/255,100/255,1)
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        Button:
+            size_hint: 1, 0.4
+            text: 'Импорт'
+            on_release: root.fileimport()
+        Button:
+            size_hint: 1, 0.4
+            text: 'Экспорт'
+            on_press: root.export()
+        Button:
+            size_hint: 1, 0.4
+            text: 'Визуализация'
+            on_release: root.vizual()
+        Button:
+            size_hint: 1, 0.4
+            text: 'Очистка'
+            on_release: root.manager.current = 'clear'
+        Button:
+            size_hint: 1, 0.4
+            text: 'Справка'
+            on_press: root.manager.current = 'docs'
+        Label:
+            id: version
+            text: ''
+
+<Clear>:
+    max_Y: edit1
+    min_Y: edit2
+    max_Z: edit3
+    min_Z: edit4
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 50
+        Label:
+            text: 'Максимальное значение Y'
+        TextInput:
+            id: edit1
+        Label:
+            text: 'Минимальное значение Y'
+        TextInput:
+            id: edit2
+        Label:
+            text: 'Максимальное значение Z'
+        TextInput:
+            id: edit3
+        Label:
+            text: 'Минимальное значение Z'
+        TextInput:
+            id: edit4
+        Button:
+            text: 'Очистить'
+            on_press: root.clear()
+        Button:
+            text: 'Назад'
+            on_press: root.manager.current = 'menu'
+<Docs>:
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            text: 'Импорт - открытие Las файла\nЭкспорт - сохранение только что открытого Las файла в txt. так и уже очищенного\nВизуализация - просмотр импортированного Las файла и нахождение нужных координат для очистки\nОчистка - открывает окно в котором мы можем записать координаты в полях max,min - Y,Z, \nНажать очистку и откроется визуальная составляющая'
+        Button:
+            text: 'Назад'
+            size_hint: 1, 0.1
+            on_press: root.manager.current = 'menu'
